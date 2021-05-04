@@ -28,5 +28,5 @@ ENV DRONE_SERVER_HOST=localhost
 
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-ADD --from=builder /go/bin/drone-server /bin/
+COPY --from=builder /go/bin/drone-server /bin/
 ENTRYPOINT ["/bin/drone-server"]
