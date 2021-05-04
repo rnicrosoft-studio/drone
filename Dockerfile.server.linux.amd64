@@ -5,9 +5,9 @@ FROM golang:1.14.4-alpine as builder
 # RUN apk add -U --no-cache ca-certificates
 WORKDIR /build
 RUN apk add -U --no-cache alpine-sdk \
-    && git -c http.sslVerify=false clone https://github.com/drone/drone.git \
+    && git clone https://github.com/drone/drone.git \
     && cd drone \
-    && git checkout tags/${DRONE_SERVER_VERSION} -b ${DRONE_SERVER_VERSION}
+    && git checkout tags/v${DRONE_SERVER_VERSION}
 RUN go build -tags "nolimit" ./cmd/drone-server
 
 # build final image
