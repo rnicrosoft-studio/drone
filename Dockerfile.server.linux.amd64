@@ -7,8 +7,8 @@ WORKDIR /build
 RUN apk add -U --no-cache alpine-sdk \
     && git -c http.sslVerify=false clone https://github.com/drone/drone.git \
     && cd drone \
-    && git checkout tags/${DRONE_SERVER_VERSION} -b ${DRONE_SERVER_VERSION} \
-    && go build -tags "nolimit" ./cmd/drone-server
+    && git checkout tags/${DRONE_SERVER_VERSION} -b ${DRONE_SERVER_VERSION}
+RUN go build -tags "nolimit" ./cmd/drone-server
 
 # build final image
 FROM alpine AS dist
