@@ -7,7 +7,7 @@ WORKDIR /build
 RUN apk add -U --no-cache alpine-sdk \
     && git clone https://github.com/drone/drone.git \
     && cd drone \
-    && git checkout tags/v${DRONE_SERVER_VERSION}
+    && echo tags/v${DRONE_SERVER_VERSION}
 RUN go build -tags "nolimit" ./cmd/drone-server
 
 # build final image
