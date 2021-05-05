@@ -1,7 +1,6 @@
-ENV DRONE_SERVER_VERSION="1.10.1"
-
 # build drone server
 FROM golang:1.14.4-alpine as builder
+ENV DRONE_SERVER_VERSION="1.10.1"
 # RUN apk add -U --no-cache ca-certificates
 WORKDIR /build
 RUN apk add -U --no-cache alpine-sdk \
