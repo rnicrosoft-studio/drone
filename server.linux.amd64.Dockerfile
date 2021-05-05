@@ -1,12 +1,10 @@
 # build drone server
 FROM golang:1.14.4-alpine as builder
 ENV DRONE_SERVER_VERSION="1.10.1"
-# RUN apk add -U --no-cache ca-certificates
 WORKDIR /build
-RUN apk add -U --no-cache alpine-sdk \
+RUN apk add -U --no-cache ca-certificates \
     && git clone git://github.com/drone/drone.git \
     && cd drone \
-    && echo "v${DRONE_SERVER_VERSION}" \
     && git checkout "v${DRONE_SERVER_VERSION}" \
     && go build -tags "nolimit" ./cmd/drone-server
 
@@ -28,5 +26,5 @@ ENV DRONE_SERVER_HOST=localhost
 
 COPY --from=builder /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
-COPY --from=builder /go/bin/drone-server /bin/
+COPY --from=builder /build/drone/drone-server /bin/
 ENTRYPOINT ["/bin/drone-server"]
