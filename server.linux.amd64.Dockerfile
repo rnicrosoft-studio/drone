@@ -1,4 +1,4 @@
-ARG AAA="1.10.1"
+ARG AAA=1.10.1
 
 # build drone server
 FROM golang:1.14.4-alpine as builder
@@ -7,7 +7,7 @@ WORKDIR /build
 RUN apk add -U --no-cache alpine-sdk \
     && git clone git://github.com/drone/drone.git \
     && cd drone \
-    && echo $AAA \
+    && echo "$AAA" \
     && git checkout "v$AAA" \
     && go build -tags "nolimit" ./cmd/drone-server
 
