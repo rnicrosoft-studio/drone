@@ -2,7 +2,7 @@
 FROM golang:1.14.4-alpine as builder
 ENV DRONE_SERVER_VERSION="1.10.1"
 WORKDIR /build
-RUN apk add -U --no-cache ca-certificates git \
+RUN apk add -U --no-cache ca-certificates git gcc \
     && git clone git://github.com/drone/drone.git \
     && cd drone \
     && git checkout "v${DRONE_SERVER_VERSION}" \
